@@ -13,3 +13,6 @@ The key advantage of synthetic data is it looks and behaves like real data but d
 
 <br />
 
+## SVD package, and the 5 synthesizers
+<br />
+
