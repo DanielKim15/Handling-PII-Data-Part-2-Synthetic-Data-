@@ -149,6 +149,9 @@ Note: The 95% quantile and above has been removed in order to get a closer look 
 <br />
 
 ## Demonstration
+Here is a rough draft of the coding that your client can use to generate their Synthetic data:
+
+<br />
 
 ``` python
 from sdv.single_table import TVAESynthesizer, GaussianCopulaSynthesizer, CTGANSynthesizer, CopulaGANSynthesizer
@@ -235,6 +238,15 @@ def generate_synthetic_data(dataset, sdv_type, unique_id, num_samples):
 # synthetic_dataset = generate_synthetic_data(ecf_data_sample_selected, 'TVAE', 'unique_key', 25000)
 
 ```
+
+<br /> 
+## Breaking down the demonstration in steps:
+
+<br>
+
+
+After showing the demonstration, show the evaluations test and leave off with a note in the end.
+
 
 
 
