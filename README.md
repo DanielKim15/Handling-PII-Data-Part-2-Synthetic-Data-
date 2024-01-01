@@ -181,10 +181,7 @@ def generate_synthetic_data(dataset, sdv_type, unique_id, num_samples):
     metadata.set_primary_key(column_name=unique_id)
     
     # Validate metadata
-    try:
-        metadata.validate()
-    except Exception as e:
-        return f"Error: The metadata does not represent the structure and constraints of the data, try again. Details: {str(e)}"
+    metadata.validate_data(data=dataset)
     
     # Select the synthesizer based on sdv_type
     if sdv_type == 'TVAE':
@@ -240,14 +237,6 @@ def generate_synthetic_data(dataset, sdv_type, unique_id, num_samples):
 ```
 
 <br /> 
-## Breaking down the demonstration in steps:
-
-<br>
-
-
-After showing the demonstration, show the evaluations test and leave off with a note in the end.
-
-
 
 
 ## Synthetic Data Generation Function Explanation
@@ -266,7 +255,7 @@ This Python function demonstrates how to generate synthetic data using various s
 - **Function Name**: `generate_synthetic_data`
 - **Arguments**:
   - `dataset`: A pandas DataFrame representing the real dataset.
-  - `sdv_type`: A string specifying the type of SDV synthesizer to use.
+  - `sdv_type`: A string specifying the type of SDV synthesizer to use. (Options: TVAE, GaussianCopula, CTGAN, fast_ml, CopulaGAN)
   - `unique_id`: A string representing the column name to be set as the primary key.
   - `num_samples`: An integer indicating the number of synthetic data rows to generate.
 
@@ -276,25 +265,45 @@ This Python function demonstrates how to generate synthetic data using various s
    - Create a `SingleTableMetadata` object.
    - Detect and extract metadata from the provided dataset using `metadata.detect_from_dataframe(data=dataset)`.
 
+``` python
+metadata = SingleTableMetadata()
+metadata.detect_from_dataframe(data=dataset)
+
+```
+
 2. **Updating Metadata**:
    - Update metadata for the unique key column using `metadata.update_column(column_name=unique_id, sdtype='id')`.
+   - Make sure that whichever unique identifier you used is truly unique and has no duplicates. If there is one there will be an error.
    - Set the primary key for the metadata using `metadata.set_primary_key(column_name=unique_id)`.
+  
+``` python
+metadata.update_column(column_name=unique_id, sdtype='id')
+metadata.set_primary_key(column_name=unique_id)
+
+
+```
 
 3. **Metadata Validation**:
-   - Validate the metadata with `metadata.validate()`.
+   - Validate the metadata with `metadata.validate_data(data=dataset)`.
+   - The object compares both the metadata and the original data to see if the former accurately describes the latter.
    - If validation fails, return an error message indicating issues with metadata representation.
 
-4. **Synthesizer Selection and Initialization**:
+``` python
+metadata.validate_data(data=dataset)
+```
+
+
+5. **Synthesizer Selection and Initialization**:
    - Based on `sdv_type`, select and initialize the appropriate synthesizer (TVAESynthesizer, GaussianCopulaSynthesizer, etc.).
    - Configure synthesizer parameters like `enforce_min_max_values`, `enforce_rounding`, and `epochs`.
 
-5. **Fitting the Synthesizer**:
+6. **Fitting the Synthesizer**:
    - Fit the selected synthesizer to the real dataset using `synthesizer.fit(dataset)`.
 
-6. **Generating Synthetic Data**:
+7. **Generating Synthetic Data**:
    - Generate synthetic data by sampling from the fitted synthesizer with `synthetic_data = synthesizer.sample(num_rows=num_samples)`.
 
-7. **Returning Synthetic Data**:
+8. **Returning Synthetic Data**:
    - The function returns the generated synthetic DataFrame.
 
 ### Example Usage:
