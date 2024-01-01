@@ -119,7 +119,9 @@ Some context for the data we are using for the demonstration: I will be using th
    - Urban/ Rural Status (Binary Variable)
 
 <br />
+
 Another important change I made was creating a unique identifier that mixes with Funding Request Number, FRN Line Item ID, and One time Unit Cost. The unique identifier step is important because the package rely on ensuring each rows of data is unique and that that are no duplicates in the unique identifier when generating the data. If there are duplicates, you will recieve an error. If your variable is completly unique that would be ideal, but in case you do not have one be sure to create it by mixing with other variables to truly make it unique.
+
 
 <br />
 The last thing that's recommended before starting the test is to visualize the variables your going to synthesize in order to have a good reference point to use.
