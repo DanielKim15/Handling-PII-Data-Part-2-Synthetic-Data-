@@ -250,4 +250,58 @@ After showing the demonstration, show the evaluations test and leave off with a 
 
 
 
+## Synthetic Data Generation Function Explanation
+
+This Python function demonstrates how to generate synthetic data using various synthesizers from the SDV (Synthetic Data Vault) library. It allows the creation of a synthetic dataset that mimics the structure of a real dataset. Below is a detailed explanation of the function:
+
+### Importing Required Libraries and Modules:
+
+- `from sdv.single_table` imports `TVAESynthesizer`, `GaussianCopulaSynthesizer`, `CTGANSynthesizer`, `CopulaGANSynthesizer` for different types of data synthesis.
+- `from sdv.lite` imports `SingleTablePreset` for lightweight synthesizers.
+- `from sdv.metadata` imports `SingleTableMetadata` for handling metadata of the dataset.
+- `from sdv.evaluation.single_table` imports evaluation tools.
+
+### Function Definition:
+
+- **Function Name**: `generate_synthetic_data`
+- **Arguments**:
+  - `dataset`: A pandas DataFrame representing the real dataset.
+  - `sdv_type`: A string specifying the type of SDV synthesizer to use.
+  - `unique_id`: A string representing the column name to be set as the primary key.
+  - `num_samples`: An integer indicating the number of synthetic data rows to generate.
+
+### Steps Within the Function:
+
+1. **Metadata Creation and Detection**:
+   - Create a `SingleTableMetadata` object.
+   - Detect and extract metadata from the provided dataset using `metadata.detect_from_dataframe(data=dataset)`.
+
+2. **Updating Metadata**:
+   - Update metadata for the unique key column using `metadata.update_column(column_name=unique_id, sdtype='id')`.
+   - Set the primary key for the metadata using `metadata.set_primary_key(column_name=unique_id)`.
+
+3. **Metadata Validation**:
+   - Validate the metadata with `metadata.validate()`.
+   - If validation fails, return an error message indicating issues with metadata representation.
+
+4. **Synthesizer Selection and Initialization**:
+   - Based on `sdv_type`, select and initialize the appropriate synthesizer (TVAESynthesizer, GaussianCopulaSynthesizer, etc.).
+   - Configure synthesizer parameters like `enforce_min_max_values`, `enforce_rounding`, and `epochs`.
+
+5. **Fitting the Synthesizer**:
+   - Fit the selected synthesizer to the real dataset using `synthesizer.fit(dataset)`.
+
+6. **Generating Synthetic Data**:
+   - Generate synthetic data by sampling from the fitted synthesizer with `synthetic_data = synthesizer.sample(num_rows=num_samples)`.
+
+7. **Returning Synthetic Data**:
+   - The function returns the generated synthetic DataFrame.
+
+### Example Usage:
+
+```python
+synthetic_dataset = generate_synthetic_data(ecf_data_sample_selected, 'TVAE', 'unique_key', 25000)
+
+
+
 
