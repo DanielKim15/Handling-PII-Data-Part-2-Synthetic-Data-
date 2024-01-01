@@ -2,7 +2,7 @@
 
 <br />
 
-A continuation from the first part of handling PII data, in this part I'll be discussing about using a technique called synthetic data where we can generate fake data that follows similar properties of the original data. 
+A continuation from the first part of handling PII data, in this part I'll be discussing about using a technique called synthetic data where we can generate fake data that follows similar properties of the original data. Ideally the goal of this document is to educate the basics of synthetic data and provide a usable coding that the reader can send to their clients in case they face challenges in accessing the data due to beurocracy in PII data security. (Enough to where you'll be able to do high level analysis at least)
 
 <br /> 
 
@@ -14,7 +14,7 @@ The key advantage of synthetic data is it looks and behaves like real data but d
 <br />
 
 ## Real Life Example 
-During
+Continuing from Part 1 of the Handling PII Data, there was an issue my team faced with the project where we could not recieve the data in the beginning due to beurocracy issues (the lawyers from the client side were not informed or this project so they have to go through all the steps to ensure we're allowed to handle PII data). By the time we were able to obtain the entireity of the data, we only had a very short time to complete all the analysis we had planned to do before our contract was over. It greatly affected our analysis, so I'm hoping the synthetic data can be a way to avoid this issue.
 
 <br />
 
@@ -130,5 +130,9 @@ Another important change I made was creating a unique identifier that mixes with
 
 <br />
 The last thing that's recommended before starting the test is to visualize the variables your going to synthesize in order to have a good reference point to use.
+<br/>
+
+![image](https://github.com/DanielKim15/Handling-PII-Data-Part-2-Synthetic-Data-/assets/59937761/e9a6567b-df0a-49a5-b2d1-865bac55850f)
+
 
 
