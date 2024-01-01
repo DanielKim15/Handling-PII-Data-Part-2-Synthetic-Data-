@@ -150,6 +150,92 @@ Note: The 95% quantile and above has been removed in order to get a closer look 
 
 ## Demonstration
 
+``` python
+from sdv.single_table import TVAESynthesizer, GaussianCopulaSynthesizer, CTGANSynthesizer, CopulaGANSynthesizer
+from sdv.lite import SingleTablePreset
+from sdv.metadata import SingleTableMetadata
+from sdv.evaluation.single_table import get_column_plot, evaluate_quality, get_column_pair_plot
+
+def generate_synthetic_data(dataset, sdv_type, unique_id, num_samples):
+    """
+    Generates synthetic data using the specified SDV synthesizer.
+
+    Args:
+        dataset (pd.DataFrame): The dataset to base the synthetic data on.
+        sdv_type (str): Type of SDV synthesizer to use ('TVAE', 'GaussianCopula', 'CopulaGAN', 'fast_ml', or 'CTGAN').
+        unique_id (str): Column name to set as a primary key in the dataset.
+        num_samples (int): Number of synthetic data rows to generate.
+
+    Returns:
+        pd.DataFrame: The generated synthetic dataset.
+    """
+    # Create metadata object and detect from dataframe
+    metadata = SingleTableMetadata()
+    metadata.detect_from_dataframe(data=dataset)
+    
+    # Update metadata for the unique key column
+    metadata.update_column(column_name=unique_id, sdtype='id')
+    metadata.set_primary_key(column_name=unique_id)
+    
+    # Validate metadata
+    try:
+        metadata.validate()
+    except Exception as e:
+        return f"Error: The metadata does not represent the structure and constraints of the data, try again. Details: {str(e)}"
+    
+    # Select the synthesizer based on sdv_type
+    if sdv_type == 'TVAE':
+        synthesizer = TVAESynthesizer(
+                        metadata, # required
+                        enforce_min_max_values=True,
+                        enforce_rounding=True,
+                        epochs=500) 
+    elif sdv_type == 'GaussianCopula':
+        synthesizer = GaussianCopulaSynthesizer(
+                        metadata, 
+                        enforce_min_max_values=True,
+                        enforce_rounding=True,
+                        #numerical_distributions={
+                        #    'amenities_fee': 'beta',
+                        #    'checkin_date': 'uniform'
+                        #        },
+                        #default_distribution='norm' #lets you determine what distrubution your working  with, read file for more information: https://docs.sdv.dev/sdv/single-table-data/modeling/synthesizers/gaussiancopulasynthesizer
+                        )
+    elif sdv_type == 'CTGAN':
+        synthesizer = CTGANSynthesizer(
+                        metadata, 
+                        enforce_rounding=True,
+                        epochs=500,
+                        verbose=True)
+    elif sdv_type == 'CopulaGAN':
+        synthesizer = CopulaGANSynthesizer(
+                        metadata, 
+                        enforce_min_max_values=True,
+                        enforce_rounding=True,
+                     #   numerical_distributions={
+                     #       'amenities_fee': 'beta',
+                     #       'checkin_date': 'uniform'
+                     #                       },
+                        epochs=500,
+                        verbose=True)
+    elif sdv_type == 'fast_ml':
+        synthesizer = SingleTablePreset(metadata, name='FAST_ML')
+    else:
+        return "Error: Invalid SDV synthesizer type. Choose 'TVAE', 'GaussianCopula', 'CopulaGAN', 'fast_ml', or 'CTGAN'."
+
+    # Fit the synthesizer on the dataset
+    synthesizer.fit(dataset)
+    
+    # Generate synthetic data
+    synthetic_data = synthesizer.sample(num_rows=num_samples)
+    
+    return synthetic_data
+
+# Example usage
+# synthetic_dataset = generate_synthetic_data(ecf_data_sample_selected, 'TVAE', 'unique_key', 25000)
+
+```
+
 
 
 
