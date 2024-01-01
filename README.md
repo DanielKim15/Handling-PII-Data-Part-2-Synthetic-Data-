@@ -108,6 +108,7 @@ synthesizer = CopulaGANSynthesizer(
 Some context for the data we are using for the demonstration: I will be using the Emergency Connectivity Fund open source data Form 477, Covid relief pandemic program led by the FCC federal agency to ensure that schools and libraries around the nation continue to have access to technology such as computers and internet services by reimbursing them with funds. 
 
 <br />
+
 **The data is filtered by choosing only Form Versions that are current and choosing 7 columns from the dataset:**
    - Application Number (Identifier)
    - unique_key (Unique Identifier, Primary Key)
