@@ -17,6 +17,8 @@ The key advantage of synthetic data is it looks and behaves like real data but d
 <br />
 For this demonstration I am going to use a python package called the Synthetic Data Vault or SDV to create synthetic data in a tabular format (aka csv/excel). Within the package there is 5 different types of models that can be used to generate data, and they each have their own strength and weakness to consider.
 
+<br />
+
 1. **Fast ML Preset:**
    - Produces the fastest speed to create synthetic data
    - Great for first time SDV users, can be used to get quickly started with the syntethic data
@@ -101,3 +103,7 @@ synthesizer = CopulaGANSynthesizer(
 )
 ```
 <br />
+
+## Preperation for the demonstration
+Some context for the data we are using for the demonstration: I will be using the Emergency Connectivity Fund open source data Form 477, Covid relief pandemic program led by the FCC federal agency to ensure that schools and libraries around the nation continue to have access to technology such as computers and internet services by reimbursing them with funds. 
+
