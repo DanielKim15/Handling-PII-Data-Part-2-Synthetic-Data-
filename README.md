@@ -52,9 +52,52 @@ synthesizer = GaussianCopulaSynthesizer(
 )
 
 ```
+<br />
 
 3. **CTGANSynthesizer:**
    - The CTGAN Synthesizer uses GAN-based, deep learning methods to train a model and generate synthetic data
-   - Generative modeling is an unsupervised learning task in machine learning that involves automatically discovering and learning the regularities or patterns in input data in such a way that the model can be used to generate or output new examples that plausibly could have been drawn from the original dataset
-``` python
+   - GANs (Generative Adversarial Networks) are a type of unsupervised machine learning model, consisting of a generator that creates data and a discriminator that differentiates between real and generated data, improving iteratively through adversarial training until the generated data is indistinguishable from real data.
 
+``` python
+synthesizer = CTGANSynthesizer(
+    metadata, # required
+    enforce_rounding=False,
+    epochs=500,
+    verbose=True
+)
+```
+<br />
+
+4. **TVAESynthesizer:**
+   - The TVAE Synthesizer uses a variational autoencoder (VAE)-based, neural network techniques to train a model and generate synthetic data.
+   - Variational Autoencoders (VAEs) are a type of generative model in machine learning that use a neural network architecture to encode input data into a latent space and then reconstruct it back to the original data, with a focus on learning the distribution of data for generating new, similar data.
+   - For more info: https://www.cs.columbia.edu/~zemel/Class/Nndl-2021/files/lec13.pdf
+     
+``` python
+synthesizer = TVAESynthesizer(
+    metadata, # required
+    enforce_min_max_values=True,
+    enforce_rounding=False,
+    epochs=500
+)
+```
+<br />
+
+5. **CopulaGANSynthesizer:**
+   - The Copula GAN Synthesizer uses a mix classic, statistical methods and GAN-based deep learning methods to train a model and generate synthetic data.
+   - Experimental, results may vary
+
+``` python
+synthesizer = CopulaGANSynthesizer(
+    metadata, # required
+    enforce_min_max_values=True,
+    enforce_rounding=False,
+    numerical_distributions={
+        'amenities_fee': 'beta',
+        'checkin_date': 'uniform'
+    },
+    epochs=500,
+    verbose=True
+)
+```
+<br />
