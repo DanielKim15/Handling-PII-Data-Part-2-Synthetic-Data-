@@ -286,7 +286,7 @@ metadata.set_primary_key(column_name=unique_id)
 3. **Metadata Validation**:
    - Validate the metadata with `metadata.validate_data(data=dataset)`.
    - The object compares both the metadata and the original data to see if the former accurately describes the latter.
-   - If validation fails, return an error message indicating issues with metadata representation.
+   - If validation fails, return a descriptive error message on where it happened.
 
 ``` python
 metadata.validate_data(data=dataset)
@@ -296,20 +296,56 @@ metadata.validate_data(data=dataset)
 5. **Synthesizer Selection and Initialization**:
    - Based on `sdv_type`, select and initialize the appropriate synthesizer (TVAESynthesizer, GaussianCopulaSynthesizer, etc.).
    - Configure synthesizer parameters like `enforce_min_max_values`, `enforce_rounding`, and `epochs`.
+   - Note: Each model are customizable so feel free to tune the hyperparameter to fit your need. In the main function I've provided all the parts you can modify within the model.
+
+``` python
+if sdv_type == 'TVAE':
+    synthesizer = TVAESynthesizer(metadata, enforce_min_max_values=True, ...)
+elif sdv_type == 'GaussianCopula':
+    synthesizer = GaussianCopulaSynthesizer(metadata, ...)
+elif sdv_type == 'CTGAN':
+    synthesizer = CTGANSynthesizer(metadata, ...)
+elif sdv_type == 'CopulaGAN':
+    synthesizer = CopulaGANSynthesizer(metadata, ...)
+elif sdv_type == 'fast_ml':
+    synthesizer = SingleTablePreset(metadata, name='FAST_ML')
+else:
+    return "Error: Invalid SDV synthesizer type."
+``` 
 
 6. **Fitting the Synthesizer**:
    - Fit the selected synthesizer to the real dataset using `synthesizer.fit(dataset)`.
+   - This will allow you to apply your trained model to the real dataset itself and start the process of generating synthetic data.
+
+``` python
+   synthesizer.fit(dataset)
+``` 
 
 7. **Generating Synthetic Data**:
    - Generate synthetic data by sampling from the fitted synthesizer with `synthetic_data = synthesizer.sample(num_rows=num_samples)`.
+   - However many rows of data you want to produce can be written down in the num_samples.
+   - The time it takes to generate new data is dependent on which model you use, the size of the data including rows and columns, and the hyperparameter tuning on the model.
+
+``` python
+synthetic_data = synthesizer.sample(num_rows=num_samples)
+
+``` 
 
 8. **Returning Synthetic Data**:
    - The function returns the generated synthetic DataFrame.
-
+     
+``` python
+   return synthetic_data
+``` 
 ### Example Usage:
 
 ```python
+
 synthetic_dataset = generate_synthetic_data(ecf_data_sample_selected, 'TVAE', 'unique_key', 25000)
+```
+<br />
+
+## Final Thoughts
 
 
 
