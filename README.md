@@ -141,6 +141,15 @@ Continuous Variables:
 Categorical Variables:
 ![image](https://github.com/DanielKim15/Handling-PII-Data-Part-2-Synthetic-Data-/assets/59937761/4f467319-3710-40c1-abac-4d579ccaa852)
 
+<br />
+
+Note: The 95% quantile and above has been removed in order to get a closer look into the distrubtuion of the continous variables. The extreme skewedness beforehand made it very hard to read it.
+
+
+<br />
+
+## Demonstration
+
 
 
 
