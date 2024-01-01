@@ -131,8 +131,6 @@ Another important change I made was creating a unique identifier that mixes with
 <br />
 The last thing that's recommended before starting the test is to visualize the variables your going to synthesize in order to have a good reference point to use.
 <br/>
-Continuous Variables:
-![image](https://github.com/DanielKim15/Handling-PII-Data-Part-2-Synthetic-Data-/assets/59937761/e9a6567b-df0a-49a5-b2d1-865bac55850f)
 
 <br />
 Categorical Variables:
