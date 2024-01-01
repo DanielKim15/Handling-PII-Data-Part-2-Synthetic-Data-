@@ -13,6 +13,11 @@ The key advantage of synthetic data is it looks and behaves like real data but d
 
 <br />
 
+## Real Life Example 
+During
+
+<br />
+
 ## What are the 5 syntehsizers in the SDV package?
 <br />
 For this demonstration I am going to use a python package called the Synthetic Data Vault or SDV to create synthetic data in a tabular format (aka csv/excel). Within the package there is 5 different types of models that can be used to generate data, and they each have their own strength and weakness to consider.
