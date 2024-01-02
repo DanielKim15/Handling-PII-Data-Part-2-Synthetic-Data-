@@ -402,14 +402,6 @@ If you want to look at the accuracy for each particular columns, use the object 
 ```python
 quality_report.get_details(property_name='Column Shapes')
 ```
-                                    Column        Metric     Score
-0  Total Funding Commitment Request Amount  KSComplement  0.932573
-1                             Product Type  TVComplement  0.919209
-2                      Urban/ Rural Status  TVComplement  0.983609
-3              Monthly Recurring Unit Cost  KSComplement  0.669842
-4                      Total Student Count  KSComplement  0.927928
-
-
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -469,9 +461,85 @@ quality_report.get_details(property_name='Column Shapes')
 </div>
   
 3. **Visualization**:
-   - Create a `SingleTableMetadata` object.
-   - Detect and extract metadata from the provided dataset using `metadata.detect_from_dataframe(data=dataset)`.
-   
+   - There's three ways to look at the results visually
+   - Using get_column_plot (shows the distribution for the real and synthetic data for one column)
+   - Using get_column_pair_plot (visualize the trends between a pair of columns for real and synthetic data)
+   - Using a histogram and bar graphs method
+
+<br/>
+get_column_plot
+<br/>
+
+```python
+from sdv.evaluation.single_table import get_column_plot
+import plotly.io as pio
+
+# This ensures Plotly plots show up in Jupyter notebooks
+pio.renderers.default = 'notebook'
+
+fig = get_column_plot(
+    real_data=ecf_data_sample_selected,
+    synthetic_data=synthetic_dataset,
+    metadata=metadata,
+    column_name='Total Funding Commitment Request Amount'
+)
+
+# Show the figure using Plotly's show method
+fig.show()
+```
+
+![image](https://github.com/DanielKim15/Handling-PII-Data-Part-2-Synthetic-Data-/assets/59937761/b1e31b70-faba-4435-b183-da6659e16561)
+
+
+<br />
+get_column_pair_plot
+
+<br/>
+
+```python
+from sdv.evaluation.single_table import get_column_pair_plot
+
+fig = get_column_pair_plot(
+    real_data=ecf_data_sample_selected,
+    synthetic_data=synthetic_dataset,
+    metadata=metadata,
+    column_names=['Total Funding Commitment Request Amount', 'Total Student Count'],
+    )
+    
+fig.show()
+
+```
+
+<br />
+
+Histograms and Bar Graphs
+
+Real Data Continuous Variables:
+![image](https://github.com/DanielKim15/Handling-PII-Data-Part-2-Synthetic-Data-/assets/59937761/e9a6567b-df0a-49a5-b2d1-865bac55850f)
+
+<br />
+
+
+Real Data Categorical Variables:
+![image](https://github.com/DanielKim15/Handling-PII-Data-Part-2-Synthetic-Data-/assets/59937761/4f467319-3710-40c1-abac-4d579ccaa852)
+
+<br />
+
+Syntehtic Data Continuous Variables:
+![image](https://github.com/DanielKim15/Handling-PII-Data-Part-2-Synthetic-Data-/assets/59937761/77795585-f884-405e-8995-953f1a43bb00)
+
+<br />
+
+Synthetic Data Categorical Variables:
+![image](https://github.com/DanielKim15/Handling-PII-Data-Part-2-Synthetic-Data-/assets/59937761/61252a29-4425-48b0-b7cf-8de1d34ec5b8)
+
+<br />
+
+
+
+
+
+
 
 
 
