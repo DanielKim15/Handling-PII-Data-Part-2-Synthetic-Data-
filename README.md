@@ -344,6 +344,53 @@ synthetic_data = synthesizer.sample(num_rows=num_samples)
 synthetic_dataset = generate_synthetic_data(ecf_data_sample_selected, 'TVAE', 'unique_key', 25000)
 ```
 <br />
+## Validating the results
+It's important to ensure that the output from the model has worked effectively after running through the original data. There's three steps to check the validity and effectiveness of the results:
+
+1. **Diagnosing the model**:
+   - Use run_diagnostic object to compare all three datasets (real data, synthetic data, metadata) to see if they have the same quality among each other.
+   - The results have to be 100% in this case, if its lower than 100 then something has gone wrong with the process.
+
+```python
+from sdv.evaluation.single_table import run_diagnostic
+
+diagnostic_report = run_diagnostic( #this is to ensure that the model has worked properly. Anything lower than a 100 is a problem and should be taken care of
+    real_data=ecf_data_sample_selected,
+    synthetic_data=synthetic_dataset,
+    metadata=metadata)
+```
+
+Generating report ...
+(1/2) Evaluating Data Validity: : 100%|██████████| 7/7 [00:00<00:00, 368.31it/s]
+(2/2) Evaluating Data Structure: : 100%|██████████| 1/1 [00:00<00:00, 499.14it/s]
+
+Overall Score: 100.0%
+
+Properties:
+- Data Validity: 100.0%
+- Data Structure: 100.0%
+
+
+2. **Qualtiy Check**:
+   - Use evaluate_quality to 
+   - Detect and extract metadata from the provided dataset using `metadata.detect_from_dataframe(data=dataset)`.
+
+```python
+quality_report = evaluate_quality( 
+    real_data=ecf_data_sample_selected, 
+    synthetic_data=synthetic_dataset,
+    metadata=metadata 
+)
+```
+  
+3. **Visualization**:
+   - Create a `SingleTableMetadata` object.
+   - Detect and extract metadata from the provided dataset using `metadata.detect_from_dataframe(data=dataset)`.
+   
+
+
+
+<br />
 
 ## Final Thoughts
 
