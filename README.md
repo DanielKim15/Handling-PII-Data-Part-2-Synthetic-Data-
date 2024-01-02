@@ -2,7 +2,7 @@
 
 <br />
 
-A continuation from the first part of handling PII data, in this part I'll be discussing about using a technique called synthetic data where we can generate fake data that follows similar properties of the original data. Ideally the goal of this document is to educate the basics of synthetic data and provide a usable coding that the reader can send to their clients in case they face challenges in accessing the data due to beurocracy in PII data security. (Enough to where you'll be able to do surface level analysis at least)
+A continuation from the first part of handling PII data, in this part I'll be discussing using a technique called synthetic data where we can generate fake data that follows similar properties of the original data. Ideally the goal of this document is to educate the basics of synthetic data and provide usable coding that the reader can send to their clients in case they face challenges in accessing the data due to bureaucracy in PII data security. (Enough to where you'll be able to do surface level analysis at least)
 
 <br /> 
 
@@ -14,19 +14,19 @@ The key advantage of synthetic data is it looks and behaves like real data but d
 <br />
 
 ## Real Life Example 
-Continuing from Part 1 of the Handling PII Data, there was an issue my team faced with the project where we could not recieve the data in the beginning due to beurocracy issues (the lawyers from the client side were not informed or this project so they have to go through all the steps to ensure we're allowed to handle PII data). By the time we were able to obtain the entireity of the data, we only had a very short time to complete all the analysis we had planned to do before our contract was over. It greatly affected our analysis, so I'm hoping the synthetic data can be a way to avoid this issue.
+Continuing from Part 1 of the Streamlining Bureaucratic Data Access, there was an issue my team faced with the project where we could not receive the data in the beginning due to bureaucracy issues related to PII informations. By the time we were able to obtain the entirety of the data, we only had a very short time to complete all the analysis we had planned to do before our contract was over. We used the encryption method to speed up the process, but the synthetic data generation method wasn't used because I've only recently discovered it. I do believe this method will yield better results in the future so to anyone who is currently facing this challenge, I do hope this document can help out. 
 
 <br />
 
-## What are the 5 syntehsizers in the SDV package?
+## What are the 5 synthesizers in the SDV package?
 <br />
-For this demonstration I am going to use a python package called the Synthetic Data Vault or SDV to create synthetic data in a tabular format (aka csv/excel). Within the package there is 5 different types of models that can be used to generate data, and they each have their own strength and weakness to consider.
+For this demonstration I am going to use a python package called the Synthetic Data Vault or SDV to create synthetic data in a tabular format (aka csv/excel). Within the package there are 5 different types of models that can be used to generate data, and they each have their own strength and weakness to consider.
 
 <br />
 
 1. **Fast ML Preset:**
    - Produces the fastest speed to create synthetic data
-   - Great for first time SDV users, can be used to get quickly started with the syntethic data
+   - Great for first time SDV users, can be used to get quickly started with the synthetic data
 
 ``` python
 
@@ -91,7 +91,7 @@ synthesizer = TVAESynthesizer(
 <br />
 
 5. **CopulaGANSynthesizer:**
-   - The Copula GAN Synthesizer uses a mix classic, statistical methods and GAN-based deep learning methods to train a model and generate synthetic data.
+   - The Copula GAN Synthesizer uses a mix of classic, statistical methods and GAN-based deep learning methods to train a model and generate synthetic data.
    - Experimental, results may vary
 
 ``` python
@@ -109,7 +109,7 @@ synthesizer = CopulaGANSynthesizer(
 ```
 <br />
 
-## Preperation for the demonstration
+## Preparation for the demonstration
 Some context for the data we are using for the demonstration: I will be using the Emergency Connectivity Fund open source data Form 477, Covid relief pandemic program led by the FCC federal agency to ensure that schools and libraries around the nation continue to have access to technology such as computers and internet services by reimbursing them with funds. 
 
 <br />
@@ -117,19 +117,19 @@ Some context for the data we are using for the demonstration: I will be using th
 **The data is filtered by choosing only Form Versions that are current and choosing 7 columns from the dataset:**
    - Application Number (Identifier)
    - unique_key (Unique Identifier, Primary Key)
-   - Total Funding Commitment Request Amount (Continous Variable)
-   - Total Student Count (Continous Variable)
-   - Monthly Recurring Unit Cost (Continous Variable)
+   - Total Funding Commitment Request Amount (Continuous Variable)
+   - Total Student Count (Continuous Variable)
+   - Monthly Recurring Unit Cost (Continuous Variable)
    - Product Type (Categorical Variable)
    - Urban/ Rural Status (Binary Variable)
 
 <br />
 
-Another important change I made was creating a unique identifier that mixes with Funding Request Number, FRN Line Item ID, and One time Unit Cost. The unique identifier step is important because the package rely on ensuring each rows of data is unique and that that are no duplicates in the unique identifier when generating the data. If there are duplicates, you will recieve an error. If your variable is completly unique that would be ideal, but in case you do not have one be sure to create it by mixing with other variables to truly make it unique.
+Another important change I made was creating a unique identifier that mixes with Funding Request Number, FRN Line Item ID, and One time Unit Cost. The unique identifier step is important because the package relies on ensuring each row of data is unique and that that there are no duplicates in the unique identifier when generating the data. If there are duplicates, you will receive an error. If your variable is completely unique that would be ideal, but in case you do not have one be sure to create it by mixing with other variables to truly make it unique.
 
 
 <br />
-The last thing that's recommended before starting the test is to visualize the variables your going to synthesize in order to have a good reference point to use.
+The last thing that's recommended before starting the test is to visualize the variables you're going to synthesize in order to have a good reference point to use.
 <br/>
 
 Continuous Variables:
@@ -143,7 +143,7 @@ Categorical Variables:
 
 <br />
 
-Note: The 95% quantile and above has been removed in order to get a closer look into the distrubtuion of the continous variables. The extreme skewedness beforehand made it very hard to read it.
+Note: The 95% quantile and above has been removed in order to get a closer look into the distribution of the continuous variables. The extreme skewness beforehand made it very hard to read it.
 
 
 <br />
@@ -263,7 +263,7 @@ This Python function demonstrates how to generate synthetic data using various s
 
 1. **Metadata Creation and Detection**:
    - Create a `SingleTableMetadata` object.
-   - Detect and extract metadata from the provided dataset using `metadata.detect_from_dataframe(data=dataset)`.
+   - Detects and extract metadata from the provided dataset using `metadata.detect_from_dataframe(data=dataset)`.
 
 ``` python
 metadata = SingleTableMetadata()
@@ -373,10 +373,10 @@ Properties:
 - Data Structure: 100.0%
 
 
-2. **Qualtiy Check**:
-   - Use evaluate_quality to check the similarties of the synthetic and real data.
+2. **Quality Check**:
+   - Use evaluate_quality to check the similarities of the synthetic and real data.
    - Column shapes show the similarity statistically between the synthetic and real data for one column.
-   - Column Pair Trends show the similarity statiscially between two columns for both data.
+   - Column Pair Trends show the similarity statistically between two columns for both data.
 
 ```python
 quality_report = evaluate_quality( 
@@ -526,7 +526,7 @@ Real Data Categorical Variables:
 
 <br />
 
-Syntehtic Data Continuous Variables:
+Synthetic Data Continuous Variables:
 ![image](https://github.com/DanielKim15/Handling-PII-Data-Part-2-Synthetic-Data-/assets/59937761/77795585-f884-405e-8995-953f1a43bb00)
 
 <br />
@@ -535,13 +535,13 @@ Synthetic Data Categorical Variables:
 ![image](https://github.com/DanielKim15/Handling-PII-Data-Part-2-Synthetic-Data-/assets/59937761/61252a29-4425-48b0-b7cf-8de1d34ec5b8)
 
 <br />
-Note: For the histograms and bar graphs method, I've used a TVAE method to generate 25,000 rows out of 30,000+ compared to the original. From our previous diagnostic report it seems that most of the continous variables and categorical variables seem to have high similarities with the real data, but the Monthly Recurring cost seems to have a different outcome. The real data seems to have occasional bumps on the x-axis for cost, but when looking at the synthetic data the x-axis seems to be almost completely smoothed out, unimodal like at this point. There will be other columns like this one where the model won't produce a high level of accuracy when producing the synthetic data, but considering how goal is to get started with the high level analysis and wait until the client sends over the real data, the accuracy is acceptable at this point. The column can also be excluded from the analysis too in case the accuracy is way too low for the user to use.
+Note: For the histograms and bar graphs method, I've used a TVAE method to generate 25,000 rows out of 30,000+ compared to the original. From our previous diagnostic report it seems that most of the continuous variables and categorical variables seem to have high similarities with the real data, but the Monthly Recurring cost seems to have a different outcome. The real data seems to have occasional bumps on the x-axis for cost, but when looking at the synthetic data the x-axis seems to be almost completely smoothed out, unimodal like at this point. There will be other columns like this one where the model won't produce a high level of accuracy when producing the synthetic data, but considering how the goal is to get started with the high level analysis and wait until the client sends over the real data, the accuracy is acceptable at this point. The column can also be excluded from the analysis too in case the accuracy is way too low for the user to use.
 
 
 <br />
 
 ## Final Thoughts
-Not everything goes smoothly as planned, sometimes we'd have to change our methods to adapt to the situation. Encountering beurocracy issues when retrieving the data can be a hassle, but with synthetic data it could help alleviate some of that issue. Ideally you'd still need the real data if you need to do a more in depth analysis, but in case there is a delay on obtaining PII data, hopefully this method can help alleviate some of the obstacles that comes with this.
+Not everything goes smoothly as planned, sometimes we'd have to change our methods to adapt to the situation. Encountering bureaucracy issues when retrieving the data can be a hassle, but with synthetic data it could help alleviate some of that issue. Ideally you'd still need the real data if you need to do a more in depth analysis, but in case there is a delay on obtaining PII data, hopefully this method can help alleviate some of the obstacles that comes with this.
 
 
 
