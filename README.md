@@ -374,8 +374,9 @@ Properties:
 
 
 2. **Qualtiy Check**:
-   - Use evaluate_quality to 
-   - Detect and extract metadata from the provided dataset using `metadata.detect_from_dataframe(data=dataset)`.
+   - Use evaluate_quality to check the similarties of the synthetic and real data.
+   - Column shapes show the similarity statistically between the synthetic and real data for one column.
+   - Column Pair Trends show the similarity statiscially between two columns for both data.
 
 ```python
 quality_report = evaluate_quality( 
@@ -540,7 +541,7 @@ Note: For the histograms and bar graphs method, I've used a TVAE method to gener
 <br />
 
 ## Final Thoughts
-
+Not everything goes smoothly as planned, sometimes we'd have to change our methods to adapt to the situation. Encountering beurocracy issues when retrieving the data can be a hassle, but with synthetic data it could help alleviate some of that issue. Hopefully you won't encounter this with one of your clients, but in case you do I hope this document can be of use.
 
 
 
