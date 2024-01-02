@@ -344,8 +344,10 @@ synthetic_data = synthesizer.sample(num_rows=num_samples)
 synthetic_dataset = generate_synthetic_data(ecf_data_sample_selected, 'TVAE', 'unique_key', 25000)
 ```
 <br />
+
 ## Validating the results
 It's important to ensure that the output from the model has worked effectively after running through the original data. There's three steps to check the validity and effectiveness of the results:
+
 
 1. **Diagnosing the model**:
    - Use run_diagnostic object to compare all three datasets (real data, synthetic data, metadata) to see if they have the same quality among each other.
@@ -382,6 +384,30 @@ quality_report = evaluate_quality(
     metadata=metadata 
 )
 ```
+Generating report ...
+(1/2) Evaluating Column Shapes: : 100%|██████████| 7/7 [00:00<00:00, 87.19it/s]
+(2/2) Evaluating Column Pair Trends: : 100%|██████████| 21/21 [00:00<00:00, 56.76it/s] 
+
+Overall Score: 63.6%
+
+Properties:
+- Column Shapes: 88.66%
+- Column Pair Trends: 38.53%
+
+<br />
+
+If you want to look at the accuracy for each particular columns, use the object quality_report.get_details for closer inspection:
+<br/>
+
+```python
+quality_report.get_details(property_name='Column Shapes')
+```
+                                    Column        Metric     Score
+0  Total Funding Commitment Request Amount  KSComplement  0.932573
+1                             Product Type  TVComplement  0.919209
+2                      Urban/ Rural Status  TVComplement  0.983609
+3              Monthly Recurring Unit Cost  KSComplement  0.669842
+4                      Total Student Count  KSComplement  0.927928
   
 3. **Visualization**:
    - Create a `SingleTableMetadata` object.
