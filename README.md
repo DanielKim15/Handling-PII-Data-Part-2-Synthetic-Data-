@@ -1,8 +1,8 @@
-# Handling PII Data Part 2 Synthetic Data
+# Streamlining Bureaucratic Data Access Part 2: Generating Synthetic Data in Python for Preliminary Analysis
 
 <br />
 
-A continuation from the first part of handling PII data, in this part I'll be discussing about using a technique called synthetic data where we can generate fake data that follows similar properties of the original data. Ideally the goal of this document is to educate the basics of synthetic data and provide a usable coding that the reader can send to their clients in case they face challenges in accessing the data due to beurocracy in PII data security. (Enough to where you'll be able to do high level analysis at least)
+A continuation from the first part of handling PII data, in this part I'll be discussing about using a technique called synthetic data where we can generate fake data that follows similar properties of the original data. Ideally the goal of this document is to educate the basics of synthetic data and provide a usable coding that the reader can send to their clients in case they face challenges in accessing the data due to beurocracy in PII data security. (Enough to where you'll be able to do surface level analysis at least)
 
 <br /> 
 
@@ -541,7 +541,7 @@ Note: For the histograms and bar graphs method, I've used a TVAE method to gener
 <br />
 
 ## Final Thoughts
-Not everything goes smoothly as planned, sometimes we'd have to change our methods to adapt to the situation. Encountering beurocracy issues when retrieving the data can be a hassle, but with synthetic data it could help alleviate some of that issue. Hopefully you won't encounter this with one of your clients, but in case you do I hope this document can be of use.
+Not everything goes smoothly as planned, sometimes we'd have to change our methods to adapt to the situation. Encountering beurocracy issues when retrieving the data can be a hassle, but with synthetic data it could help alleviate some of that issue. Ideally you'd still need the real data if you need to do a more in depth analysis, but in case there is a delay on obtaining PII data, hopefully this method can help alleviate some of the obstacles that comes with this.
 
 
 
