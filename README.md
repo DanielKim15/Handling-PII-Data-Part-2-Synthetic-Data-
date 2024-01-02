@@ -2,7 +2,7 @@
 
 <br />
 
-A continuation from the first part of handling PII data, in this part I'll be discussing using a technique called synthetic data where we can generate fake data that follows similar properties of the original data. Ideally the goal of this document is to educate the basics of synthetic data and provide usable coding that the reader can send to their clients in case they face challenges in accessing the data due to bureaucracy in PII data security. (Enough to where you'll be able to do surface level analysis at least)
+A continuation from the first part of steamlining data access, in this part I'll be discussing using a technique called synthetic data where we can generate fake data that follows similar properties of the original data. Ideally the goal of this document is to educate the basics of synthetic data and provide usable coding that the reader can use to get started on doing surface level analysis without real data.
 
 <br /> 
 
@@ -11,10 +11,6 @@ Synthetic data is artificially generated to mimic real-world data. It is based o
 
 The key advantage of synthetic data is it looks and behaves like real data but does not contain private information. It also lets you generate large datasets even with a small sample of real data.
 
-<br />
-
-## Real Life Example 
-Continuing from Part 1 of the Streamlining Bureaucratic Data Access, there was an issue my team faced with the project where we could not receive the data in the beginning due to bureaucracy issues related to PII informations. By the time we were able to obtain the entirety of the data, we only had a very short time to complete all the analysis we had planned to do before our contract was over. We used the encryption method to speed up the process, but the synthetic data generation method wasn't used because I've only recently discovered it. I do believe this method will yield better results in the future so to anyone who is currently facing this challenge, I do hope this document can help out. 
 
 <br />
 
@@ -535,13 +531,13 @@ Synthetic Data Categorical Variables:
 ![image](https://github.com/DanielKim15/Handling-PII-Data-Part-2-Synthetic-Data-/assets/59937761/61252a29-4425-48b0-b7cf-8de1d34ec5b8)
 
 <br />
-Note: For the histograms and bar graphs method, I've used a TVAE method to generate 25,000 rows out of 30,000+ compared to the original. From our previous diagnostic report it seems that most of the continuous variables and categorical variables seem to have high similarities with the real data, but the Monthly Recurring cost seems to have a different outcome. The real data seems to have occasional bumps on the x-axis for cost, but when looking at the synthetic data the x-axis seems to be almost completely smoothed out, unimodal like at this point. There will be other columns like this one where the model won't produce a high level of accuracy when producing the synthetic data, but considering how the goal is to get started with the high level analysis and wait until the client sends over the real data, the accuracy is acceptable at this point. The column can also be excluded from the analysis too in case the accuracy is way too low for the user to use.
+Note: For the histograms and bar graphs method, I've used a TVAE method to generate 25,000 rows out of 30,000+ compared to the original. From our previous diagnostic report it seems that most of the continuous variables and categorical variables seem to have high similarities with the real data, but the Monthly Recurring cost seems to have a different outcome. The real data seems to have occasional bumps on the x-axis for cost, but when looking at the synthetic data the x-axis seems to be almost completely smoothed out, unimodal like at this point. There will be other columns like this one where the model won't produce a high level of accuracy when producing the synthetic data, so it is important to keep in mind when doing the analysis. The column can also be excluded from the analysis too in case the accuracy is way too low for the user to use.
 
 
 <br />
 
 ## Final Thoughts
-Not everything goes smoothly as planned, sometimes we'd have to change our methods to adapt to the situation. Encountering bureaucracy issues when retrieving the data can be a hassle, but with synthetic data it could help alleviate some of that issue. Ideally you'd still need the real data if you need to do a more in depth analysis, but in case there is a delay on obtaining PII data, hopefully this method can help alleviate some of the obstacles that comes with this.
+Synthetic Data can provide alternative ways to get started on the data without the risk of handling PII data. Considering how the future of generative models are progressing fast, having the accuracy between real and syntehtic is only going to get better over time.
 
 
 
