@@ -408,6 +408,65 @@ quality_report.get_details(property_name='Column Shapes')
 2                      Urban/ Rural Status  TVComplement  0.983609
 3              Monthly Recurring Unit Cost  KSComplement  0.669842
 4                      Total Student Count  KSComplement  0.927928
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Column</th>
+      <th>Metric</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Total Funding Commitment Request Amount</td>
+      <td>KSComplement</td>
+      <td>0.932573</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Product Type</td>
+      <td>TVComplement</td>
+      <td>0.919209</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Urban/ Rural Status</td>
+      <td>TVComplement</td>
+      <td>0.983609</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Monthly Recurring Unit Cost</td>
+      <td>KSComplement</td>
+      <td>0.669842</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Total Student Count</td>
+      <td>KSComplement</td>
+      <td>0.927928</td>
+    </tr>
+  </tbody>
+</table>
+</div>
   
 3. **Visualization**:
    - Create a `SingleTableMetadata` object.
