@@ -534,13 +534,7 @@ Synthetic Data Categorical Variables:
 ![image](https://github.com/DanielKim15/Handling-PII-Data-Part-2-Synthetic-Data-/assets/59937761/61252a29-4425-48b0-b7cf-8de1d34ec5b8)
 
 <br />
-
-
-
-
-
-
-
+Note: For the histograms and bar graphs method, I've used a TVAE method to generate 25,000 rows out of 30,000+ compared to the original. From our previous diagnostic report it seems that most of the continous variables and categorical variables seem to have high similarities with the real data, but the Monthly Recurring cost seems to have a different outcome. The real data seems to have occasional bumps on the x-axis for cost, but when looking at the synthetic data the x-axis seems to be almost completely smoothed out, unimodal like at this point. There will be other columns like this one where the model won't produce a high level of accuracy when producing the synthetic data, but considering how goal is to get started with the high level analysis and wait until the client sends over the real data, the accuracy is acceptable at this point. The column can also be excluded from the analysis too in case the accuracy is way too low for the user to use.
 
 
 <br />
