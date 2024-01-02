@@ -1,4 +1,4 @@
-# Streamlining Bureaucratic Data Access Part 2: Generating Synthetic Data in Python for Preliminary Analysis
+# Streamlining Data Access Part 2: Generating Synthetic Data in Python for Preliminary Analysis
 
 <br />
 
